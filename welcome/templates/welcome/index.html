@@ -1,0 +1,191 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>IDrive</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static "welcome/css/index.css" %}">
+    <link rel="icon" href="{% static "welcome/img/favicon.png" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static "welcome/js/confirm_password.js" %}"></script>
+    <script src="{% static "welcome/js/smooth_scroll.js" %}"></script>
+</head>
+
+<body>
+  {% include "welcome/base.html" %}
+  <section id="idrive">
+    <div class="container">
+      <div id="welcome-headlines" class="text-center">
+        <h1 class="welcome-headline">Welcome on IDrive!</h1>
+        <h2 class="welcome-subheadline">Pick an instructor, Pick a time, Learn to drive!</h2>
+        <a data-toggle="modal" data-target="#myModal" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-check"></span> Register</a>
+      </div>
+    </div>
+    <div id="how_jump">
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form class="simple_form vertical_form" data-type="json" id="new_user" action="{% url 'students:register' %}" accept-charset="utf8" data-remote="true" method="post">
+        {% csrf_token %}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Subscription form</h4>
+        </div>
+        <div class="modal-body">
+            <div class="field">
+              <input placeholder="First Name" type="text" name="first_name" id="student_first_name" class="form-control" required>
+            </div>
+            <div class="field">
+              <input placeholder="Last Name" type="text" name="last_name" id="student_last_name" class="form-control" required>
+            </div>
+            <div class="field">
+              <input placeholder="E-Mail" type="text" name="email" id="student_email" class="form-control" required>
+            </div>
+            <div class="field">
+              <input placeholder="Username" type="text" name="username" id="student_email" class="form-control" required>
+            </div>
+            <div class="field">
+              <input placeholder="Password" type="password" name="password" id="student_password" class="form-control" required>
+            </div>
+            <div class="field">
+              <input placeholder="Repeat password" type="password" name="repeat_password" id="student_password_confirmation" class="form-control" required>
+            </div>
+            <div class="registrationFormAlert" id="do_match">
+            </div>
+          </div>
+        <div class="modal-footer">
+          <input type="Submit" value="Validate" class="btn btn-success">
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- How? -->
+  <section id="how">
+    <div class="container text-center">
+      <h2 class="section-heading">How does it work?</h2>
+      <div>
+        <div class="col-md-4">
+            <img src="{% static "welcome/img/how/flying_money.png" %}" class="img-responsive" alt="Flying Money">
+          <h3>No subscription fees</h3>
+          <p class="text-muted">Just register, there is absolutely no fee</p>
+        </div>
+        <div class="col-md-4">
+          <img src="{% static "welcome/img/how/money_time.png" %}" class="img-responsive" alt="Time Money">
+          <h3>You pay for what you booked</h3>
+          <p class="text-muted">Take an hour, pay an hour, there is no extra fee</p>
+        </div>
+        <div class="col-md-4">
+          <img src="{% static "welcome/img/how/driver_and_instructor.png" %}" class="img-responsive" alt="Driver and Instructor">
+          <h3>You choose your instructor</h3>
+          <p class="text-muted">Pick your instructor and start driving</p>
+        </div>
+      </div>
+    </div>
+    <div id="team_jump">
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team">
+    <div class="container text-center">
+      {% if teams %}
+        <h2 class="welcome-subheadline">Who are we?</h2>
+        {% for team in teams %}
+          {% if team.teammember_set.all %}
+            <h3>{{team.team_name}}: {{team.team_desc}}</h3>
+              {% for team_member in team.teammember_set.all %}
+              <div class="col-md-4">
+                {% static "welcome/img/team/"|add:team_member.first_name|add:"_"|add:team_member.last_name|add:".jpg" as profile_picture_path %}
+                  <a data-toggle="modal" data-target={{ "#"|add:team_member.first_name|add:"_"|add:team_member.last_name }} id=profile_element>
+                    <img src="{% static profile_picture_path %}" class="img-responsive img-circle img-thumbnail" width=200 alt="{{ team_member.first_name }}">
+                    <p id=profiles>
+                      {{team_member.first_name}} {{team_member.last_name}}
+                    </p>
+                  </a>
+                <ul class="list-inline social-buttons">
+                  {% if team_member.linkedin_url %}
+                    <li>
+                      <a href="{{ team_member.linkedin_url }}">
+                        <i class="fa fa-linkedin fa-3x"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+                  {% if team_member.github_url %}
+                    <li>
+                      <a href="{{ team_member.github_url }}">
+                        <i class="fa fa-github fa-3x"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+                </ul>
+            </div>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <p>There is no teams yet</p>
+      {% endif %}
+    </div>
+    <div id="another_jump">
+    </div>
+  </section>
+
+{% for team in teams %}
+  {% for team_member in team.teammember_set.all %}
+    {% static "welcome/img/team/"|add:team_member.first_name|add:"_"|add:team_member.last_name|add:".jpg" as profile_picture_path %}
+      <!-- Modal -->
+      <div id={{ team_member.first_name|add:"_"|add:team_member.last_name }} class="modal fade text-center" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content profile_modals">
+            <img src="{% static profile_picture_path %}" class="img-responsive img-circle img-thumbnail" width=200 alt="{{team_member.full_name}}">
+              <h3>{{team_member.first_name}} {{team_member.last_name}}</h3>
+                <p><b>Role:</b> {{team_member.role}}</p>
+                <p><b>Team:</b> {{team.team_name}}</p>
+                <p><b>Age:</b> {{team_member.age}}</p>
+                <p><b>Joined IDrive since:</b> {{team_member.since}}</p>
+                <p><b>LinkedIn:</b> {{team_member.linkedin_url}}</p>
+                <p><b>GitHub:</b> {{team_member.github_url}}</p>
+                <p><b>Email:</b> {{team_member.email}}</p>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+{% endfor %}
+
+  <!-- Another? -->
+  <section id="another">
+    <div class="container text-center">
+      <h2 class="section-heading">How does it work?</h2>
+      <div>
+        <div class="col-md-4">
+            <img src="{% static "welcome/img/how/flying_money.png" %}" class="img-responsive" alt="Flying Money">
+          <h3>No subscription fees</h3>
+          <p class="text-muted">Just register, there is absolutely no fee</p>
+        </div>
+        <div class="col-md-4">
+          <img src="{% static "welcome/img/how/money_time.png" %}" class="img-responsive" alt="Time Money">
+          <h3>You pay for what you booked</h3>
+          <p class="text-muted">Take an hour, pay an hour, there is no extra fee</p>
+        </div>
+        <div class="col-md-4">
+          <img src="{% static "welcome/img/how/driver_and_instructor.png" %}" class="img-responsive" alt="Driver and Instructor">
+          <h3>You choose your instructor</h3>
+          <p class="text-muted">Pick your instructor and start driving</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>

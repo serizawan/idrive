@@ -1,0 +1,39 @@
+<!-- Navigation navbar-fixed-top (to make nav bar move with scroll) -->
+<nav class="navbar navbar-inverse navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#idrive">IDrive</a>
+    </div>
+    <ul class="nav navbar-nav" id="register_nav_bar">
+      <li><a class="page-scroll" href="#how_jump">How?</a></li>
+      <li><a class="page-scroll" href="#team_jump">Team</a></li>
+      <li><a class="page-scroll" href="#another_jump">Another</a></li>
+    </ul>
+    <div id="register">
+      <form class="form" data-type="json" id="connection_form" action="{% url "students:login" %}" accept-charset="utf8" data-remote="true" method="post">
+        {% csrf_token %}
+        <ul class="nav navbar-nav" >
+          <li id="username">
+          <div class="field">
+            <input placeholder="Username" type="text" name="username" id="student_username_input" class="form-control">
+          </div>
+        </li>
+
+        <li id="password">
+          <div class="field">
+            <input placeholder="Password" type="password" name="password" id="student_password_input" class="form-control">
+          </div>
+        </li>
+
+        <li id="connect">
+          <input type="Submit" value="connect" class="btn btn-success">
+        </li>
+
+        </ul>
+      </form>
+    </div>
+    <div id="instructor">
+      <a href="{% url "instructors:welcome" %}" role="button" class="btn btn-warning">Instructor</a>
+    </div>
+  </div>
+</nav>

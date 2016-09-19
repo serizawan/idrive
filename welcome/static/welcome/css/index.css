@@ -1,0 +1,127 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  padding-top: 50px;
+}
+
+#how_jump {
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  background-color: #aec;
+}
+
+#team_jump {
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  background-color: #aec;
+}
+
+#another_jump {
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  background-color: #aec;
+}
+
+section#team {
+  background-image: url(../img/team/background.jpg);
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+}
+
+section#how {
+  background-image: url(../img/how/background.jpg);
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+}
+
+section#another {
+  background-image: url(../img/how/background.jpg);
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+}
+
+section#idrive {
+  background-image: url(../img/driving-lesson.jpg);
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  color: #fff;
+  position: relative;
+}
+
+section#idrive .welcome-headline {
+  font-size: 75px;
+  font-weight: bold;
+}
+
+section#idrive .welcome-subheadline {
+  font-style: italic;
+}
+
+nav#navigation {
+  margin-bottom: 0;
+  border-radius: 0;
+  font-size: 150%;
+}
+
+#welcome-headlines {
+  margin-top: 350px;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+li#username {
+  margin: 8px 10px 0px 0px;
+}
+
+li#password {
+  margin: 8px 10px 0px 0px;
+}
+
+li#connect {
+  margin: 8px 0 0px 0px;
+}
+
+#instructor {
+  margin: 8px 0 0px 0px;
+  float: right;
+}
+
+#profiles {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#profile_element {
+  cursor: pointer;
+}
+
+.profile_modals {
+  background-image: url(../img/team/background_profile.jpg);
+  background-position: center center;
+  background-size: cover;
+  color: #fff;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+ul#register_nav_bar {
+
+}
+
+div.navbar-header {
+
+}
