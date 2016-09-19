@@ -1,2 +1,2 @@
 # idrive
-A platform for drivers and instructors to meet
+A platform for future drivers and instructors to meet
